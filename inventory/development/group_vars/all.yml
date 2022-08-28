@@ -1,0 +1,115 @@
+---
+
+javaVersion: 11
+updateJava: false                                               # only when you need to update java version
+useSystemFirewall: false
+
+kafkaGroup: kafka
+kafkaUser: kafka
+kafkaGroupId: 7000
+kafkaUserId: 7000
+
+kafkaInstallDir: /data/kafka
+kafkaDataDir: "{{ kafkaInstallDir }}/kafka-data"
+kafkaLogDir: "{{ kafkaInstallDir }}/kafka-logs"
+
+kafkaGcLogs: true
+kafkaGcLogsLocation: "{{ kafkaLogDir }}"
+kafkaGcLogFileCount: 5
+kafkaGcLogFileSize: 10M # with optional K, M or G suffix
+
+# JVM Settings
+# total memory * 0.25 or 25% of total memory only
+# Rest 75% will be used for Caching 
+kafkaXms: "1g"             # 6GB is max recommended for production kafka
+kafkaXmx: "{{ kafkaXms }}"
+kafkaPort: 9092
+kafkaJmxPort: 9898
+kafkaVmMaxMapCount: 100000
+
+# zookeeper string should comma separate value
+kafkaZookeeperAddressString: 172.20.8.4:2181,172.20.8.2:2181,172.20.8.3:2181
+kafkaZookeeperConnectionTimeoutMs: 10000
+
+# please use name like <environment>-kafka, so it get distinct name in NewRelic
+kafkaClusterName: development-kafka
+
+kafkaVersion: 2.7.2
+kafkaScalaVersion: 2.13
+kafkaTarLocation: "../files/kafka_{{ kafkaScalaVersion }}-{{ kafkaVersion }}.tgz"
+
+# below will be used while decommission/downgrade only
+kafkaOldVersion: 3.0.0
+kafkaOldScalaVersion: 2.13
+
+### Production Optimized Parameters
+### if nothing is set then it will use default values.
+kafkaDefaultReplicationFactor: 3
+kafkaMinInsyncReplicas: "{{ kafkaDefaultReplicationFactor | int - 1 }}"
+kafkaBackgroundThread: 10
+kafkaMessagesMaxBytes: 1000012                                    # 1MB approx
+kafkaReplicaFetchMaxBytes: 2000000                                # this should be higher than kafkaMessagesMaxBytes
+kafkaQuededMaxRequests: 500
+kafkaNumReplicaFetchers: 1
+kafkaNumNetworkThreads: 6
+kafkaNumIoThreads: 8
+kafkaSocketSendBufferBytes: 102400
+kafkaSocetReceiveBufferBytes: 102400
+kafkaSocetRequestMaxBytes: 104857600
+kafkaNumPartitions: 1
+kafkaNumRecoveryThreadsPerDataDir: 1
+kafkaOffsetsTopicReplicationFactor: 3
+kafkaTransactionStateLogReplicationFactor: "{{ kafkaOffsetsTopicReplicationFactor}}"
+kafkaTransactionStateLogMinIsr: "{{  kafkaOffsetsTopicReplicationFactor }}"
+kafkaLogFlushIntervalMessages: 10000
+kafkaLogFlushIntervalMs: 1000
+kafkaLogRetentionHours: 168
+kafkaLogSegmentBytes: 2073741824                                # need to ask kafka expert, should we use default 1GB here or 2GB or more
+kafkalogRetentionCheckIntervalMs: 300000
+kafkaGroupInitRebalanceDelayMs: 3
+
+### kafkaPort
+portNumber: 9092
+portStatus: started
+
+## kafkaService
+serviceName: kafka
+serviceState: started
+
+
+## =============== zookeeper =================
+systemUpgradeRequired: false
+
+zookeeperGroup: "zookeeper"
+zookeeperUser: "zookeeper"
+zookeeperGroupId: 6000
+zookeeperUserId: 6000
+
+zookeeperInstallDir: "/data/zookeeper"
+zookeeperDataDir: "{{ zookeeperInstallDir }}/zookeeper-data"
+zookeeperLogDir: "{{ zookeeperInstallDir }}/zookeeper-logs"
+
+# jvm settings
+zookeeperXms: "256m"
+zookeeperXmx: "{{ zookeeperXms }}"
+ZookeeperJvmFlags: ""
+
+# jmx settings, updated via clusterJvmConfigs.yml
+zookeeperJmxEnabled: true
+zookeeperJmxPort: 9999
+
+zookeeperVmMaxMapCount: 100000
+zookeeperTickTime: 2000
+zookeeperInitLimit: 5
+zookeeperSyncLimit: 2
+zookeeperMaxClientCnxns: 60
+zookeeperClientPort: 2181
+
+zookeeperPrometheusExporterEnabled: true
+zookeeperPrometheusExporterHttpPort: 7000
+
+zookeeperVersion: 3.8.0
+zookeeperOldVersion: 3.7.1 # only used in removing old versions
+
+# use local tar only
+zookeeperTarLocation: "../files/apache-zookeeper-{{ zookeeperVersion }}-bin.tar.gz"

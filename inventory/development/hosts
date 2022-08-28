@@ -1,0 +1,15 @@
+[all:vars]
+ansible_connection=ssh 
+ansible_become_method=sudo 
+ansible_become=true
+ansible_user=cukzdroid
+#ansible_ssh_private_key_file = ~/.vagrant.d/insecure_private_key
+
+[clusterNodes]
+vm-sre-lab01-sea2-kafka-1.asia-southeast2-a.c.sre-lab01.internal:22 kafkaBrokerRackId=1
+vm-sre-lab01-sea2-kafka-2.asia-southeast2-b.c.sre-lab01.internal:22 kafkaBrokerRackId=1
+vm-sre-lab01-sea2-kafka-3.asia-southeast2-c.c.sre-lab01.internal:22 kafkaBrokerRackId=1
+
+[clusterAddNodes]
+
+[clusterRemoveNodes]

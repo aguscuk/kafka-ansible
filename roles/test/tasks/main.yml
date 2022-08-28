@@ -1,0 +1,8 @@
+---
+
+- name: Print Hostname
+  ansible.builtin.debug:
+    # msg: "{{ hostname }}"
+    # msg: "1{{ (ansible_host.split('-').5).split('.').0 |int |abs }}"
+    msg: "{{ ansible_default_ipv4.address.split('.').3 |int |abs }}"
+  tags: test

@@ -1,0 +1,5 @@
+---
+
+- name: java installation
+  ansible.builtin.include_tasks: install.yml
+  tags: install_openjdk11

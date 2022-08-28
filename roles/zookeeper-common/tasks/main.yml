@@ -1,0 +1,16 @@
+---
+
+# - name: Append hosts
+#   ansible.builtin.include_tasks: appendHosts.yml
+
+- name: Installing common utils
+  ansible.builtin.include_tasks: commonUtils.yml
+
+- name: Create user and group
+  ansible.builtin.include_tasks: createUser.yml
+
+- name: Create zookeeper dir structure
+  ansible.builtin.include_tasks: createDirStructure.yml
+
+- name: System tuning tasks
+  ansible.builtin.include_tasks: systemTuning.yml

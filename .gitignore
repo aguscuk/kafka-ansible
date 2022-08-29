@@ -9,7 +9,6 @@
 *pwd*
 *pass*
 *password*
-*.txt
 
 # Exclude all binaries
 *.bin

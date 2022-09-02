@@ -15,11 +15,11 @@
         name: ../roles/java
 
   roles:
-  - ../roles/test
-  - ../roles/zookeeper-common
-  - ../roles/zookeeper-install
-  - ../roles/zookeeper-configure
-  - ../roles/zookeeper-service
+  - {role: '../roles/test', tags: 'test'}
+  - {role: '../roles/zookeeper-common', tags: 'zookeeper-common'}
+  - {role: '../roles/zookeeper-install', tags: 'zookeeper-install'}
+  - {role: '../roles/zookeeper-configure', tags: 'zookeeper-configure'}
+  - {role: '../roles/zookeeper-service', tags: 'zookeeper-service'}
 
 - hosts: clusterNodes
   gather_facts: false

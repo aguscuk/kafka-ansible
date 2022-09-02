@@ -28,7 +28,7 @@ kafkaJmxPort: 9898
 kafkaVmMaxMapCount: 100000
 
 # zookeeper string should comma separate value
-kafkaZookeeperAddressString: 172.20.8.4:2181,172.20.8.2:2181,172.20.8.3:2181
+kafkaZookeeperAddressString: 172.20.2.2:2181,172.20.2.3:2181,172.20.2.4:2181
 kafkaZookeeperConnectionTimeoutMs: 10000
 
 # please use name like <environment>-kafka, so it get distinct name in NewRelic

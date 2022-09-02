@@ -3,13 +3,13 @@
   gather_facts: true
   become: true
   roles:
-    - ../roles/kafka-common
-    - ../roles/kafka-install
-    - ../roles/kafka-configure
-    - ../roles/kafka-crons
-    - ../roles/kafka-service
-    - ../roles/kafka-portCheck
-
+    - {role: '../roles/test', tags: 'test'}
+    - {role: '../roles/kafka-common', tags: 'kafka-common'}
+    - {role: '../roles/kafka-install', tags: 'kafka-install'}
+    - {role: '../roles/kafka-configure', tags: 'kafka-configure'}
+    - {role: '../roles/kafka-crons', tags: 'kafka-crons'}
+    - {role: '../roles/kafka-service', tags: 'kafka-service'}
+    - {role: '../roles/kafka-portCheck', tags: 'kafka-portCheck'}
 
 - hosts: clusterNodes
   gather_facts: false
